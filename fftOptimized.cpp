@@ -107,10 +107,14 @@
     }
     four1(fr - 1, n, 1);
 
+    double rex, imgx, refr, imgfr;
     for (int i = 0; i < n2; i += 2) {
-      double temp = (x[i] * fr[i] - x[i + 1] * fr[i + 1]);
-      x[i + 1] = (x[i] * fr[i + 1] + x[i + 1] * fr[i]);
-      x[i] = temp;
+      rex = x[i];
+      imgx = x[i + 1];
+      refr = fr[i];
+      imgfr = fr[i + 1];
+      x[i] = rex * refr - imgx * imgfr;
+      x[i + 1] = rex * imgfr + imgx * refr;
     }
 
 
