@@ -89,11 +89,13 @@
     // optimization 2
     int n2 = n << 1;
 
-    double * x = (double *) malloc(sizeof(double) * n2);
-    double * fr = (double *) malloc(sizeof(double) * n2);
+    int mallocSize = sizeof(double) * n2;
 
-    memset(x, 0, sizeof(double) * n2);
-    memset(fr, 0, sizeof(double) * n2);
+    double * x = (double *) malloc(mallocSize);
+    double * fr = (double *) malloc(mallocSize);
+
+    memset(x, 0, mallocSize);
+    memset(fr, 0, mallocSize);
 
     for (int i = 0; i < inputLength; i++) {
       x[i << 1] = inputData[i];
@@ -115,7 +117,7 @@
     four1(x - 1, n, -1);
 
     int outputLength = inputLength + irLength - 1;
-    double * outputData = (double *) malloc(sizeof(double) * outputLength);
+    double * outputData = (double *) malloc(mallocSize >>> 1);
 
     for (int i = 0; i < outputLength; i++) {
       outputData[i] = x[i << 1];
