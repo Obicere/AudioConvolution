@@ -10,7 +10,7 @@ void Convolve::convolve() {
   int irLength = ir->getLength();
 
   int outputLength = inputLength + irLength - 1;
-  double * outputData = (double *) malloc(sizeof(double) * outputLength);
+  double * outputData = new double[outputLength];
   memset(outputData, 0, sizeof(double) * outputLength);
 
   double * inputData = input->getData();

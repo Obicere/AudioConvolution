@@ -75,8 +75,8 @@
     int n = (int) pow(2, (int) log2(inputLength) + 1);
     int n2 = n * 2;
 
-    double * x = (double *) malloc(sizeof(double) * n2);
-    double * fr = (double *) malloc(sizeof(double) * n2);
+    double * x = new double[n2];
+    double * fr = new double[n2];
 
     memset(x, 0, sizeof(double) * n2);
     memset(fr, 0, sizeof(double) * n2);
@@ -101,12 +101,14 @@
     four1(x - 1, n, -1);
 
     int outputLength = inputLength + irLength - 1;
-    double * outputData = (double *) malloc(sizeof(double) * outputLength);
+    double * outputData = new double[outputLength];
 
     for (int i = 0; i < outputLength; i++) {
       outputData[i] = x[i * 2];
     }
-    free(fr);
+
+    delete[] x;
+    delete[] fr;
 
     output->setData(outputData, outputLength);
   }

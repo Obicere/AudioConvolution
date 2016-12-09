@@ -89,11 +89,8 @@
     // optimization 2
     int n2 = n << 1;
 
-    // optimization 3
-    int mallocSize = sizeof(double) * n2;
-
-    double * x = (double *) malloc(mallocSize);
-    double * fr = (double *) malloc(mallocSize);
+    double * x = new double[n2];
+    double * fr = new double[n2];
 
     for (int i = 0; i < inputLength; i++) {
       x[i << 1] = inputData[i];
@@ -122,12 +119,14 @@
     four1(x - 1, n, -1);
 
     int outputLength = inputLength + irLength - 1;
-    double * outputData = (double *) malloc(mallocSize >>> 1);
+    double * outputData = new double[outputLength];
 
     for (int i = 0; i < outputLength; i++) {
       outputData[i] = x[i << 1];
     }
-    free(fr);
+
+    delete[] fr;
+    delete[] x;
 
     output->setData(outputData, outputLength);
   }

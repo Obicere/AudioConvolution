@@ -26,7 +26,7 @@ void Wav::read(char * fileName) {
   }
 
   int length = headerInfo.subchunk2_size / 2; // 2 bytes per sample
-  double * data = (double *) malloc(sizeof(double) * length);
+  double * data = new double[length];
 
   int readCount = 0;
   short readValue;

@@ -50,7 +50,7 @@ public:
   }
 
   ~Wav() {
-    free(data);
+    delete[] data;
     data = NULL;
   }
 
