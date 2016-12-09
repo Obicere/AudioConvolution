@@ -89,26 +89,29 @@
     // optimization 2
     int n2 = n << 1;
 
+    // optimization 3
     int mallocSize = sizeof(double) * n2;
 
     double * x = (double *) malloc(mallocSize);
     double * fr = (double *) malloc(mallocSize);
 
-    memset(x, 0, mallocSize);
-    memset(fr, 0, mallocSize);
-
     for (int i = 0; i < inputLength; i++) {
       x[i << 1] = inputData[i];
+      // optimization 5
+      x[(i << 1) + 1] = 0;
     }
     four1(x - 1, n, 1);
 
     for (int i = 0; i < irLength; i++) {
       fr[i << 1] = irData[i];
+      // optimization 5
+      fr[(i << 1) + 1] = 0;
     }
     four1(fr - 1, n, 1);
 
     double rex, imgx, refr, imgfr;
     for (int i = 0; i < n2; i += 2) {
+      // optimization 4
       rex = x[i];
       imgx = x[i + 1];
       refr = fr[i];
@@ -116,8 +119,6 @@
       x[i] = rex * refr - imgx * imgfr;
       x[i + 1] = rex * imgfr + imgx * refr;
     }
-
-
     four1(x - 1, n, -1);
 
     int outputLength = inputLength + irLength - 1;
