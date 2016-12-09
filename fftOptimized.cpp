@@ -86,7 +86,8 @@
 
     // optimization 1
     int n = upper_power_of_two(inputLength);
-    int n2 = n * 2;
+    // optimization 2
+    int n2 = n << 1;
 
     double * x = (double *) malloc(sizeof(double) * n2);
     double * fr = (double *) malloc(sizeof(double) * n2);
@@ -95,12 +96,12 @@
     memset(fr, 0, sizeof(double) * n2);
 
     for (int i = 0; i < inputLength; i++) {
-      x[i * 2] = inputData[i];
+      x[i << 1] = inputData[i];
     }
     four1(x - 1, n, 1);
 
     for (int i = 0; i < irLength; i++) {
-      fr[i * 2] = irData[i];
+      fr[i << 1] = irData[i];
     }
     four1(fr - 1, n, 1);
 
@@ -117,7 +118,7 @@
     double * outputData = (double *) malloc(sizeof(double) * outputLength);
 
     for (int i = 0; i < outputLength; i++) {
-      outputData[i] = x[i * 2];
+      outputData[i] = x[i << 1];
     }
     free(fr);
 
